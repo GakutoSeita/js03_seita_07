@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Chatアプリ</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- コンテンツ表示画面 -->
+
+<header>
+    <h1>たけのこにょっきゲーム</h1>
+    <button id="NewGame">New Game</button>
+    <button id="AllDelete">All Delete</button>
+</header>
+
+<!--  div>div*3  -->
+<div>
+    <div id="uname-box">
+        Player Name: <input type="text" id="uname">
+    </div>
+    <div>
+        <img src="img/Takenoko1.png" type="button" class="send" 
+            id="send1" value = "1" onclick="disabled = true;"
+        >
+        <img src="img/Takenoko2.png" type="button" class="send" 
+            id="send2" value = "2" onclick="disabled = true;"
+        >
+        <img src="img/Takenoko3.png" type="button" class="send" 
+            id="send3" value = "3" onclick="disabled = true;"
+        >
+        <img src="img/Takenoko4.png" type="button" class="send" 
+            id="send4" value = "4" onclick="disabled = true;"
+        >
+        <img src="img/Takenoko5.png" type="button" class="send" 
+            id="send5" value = "5" onclick="disabled = true;"
+        >
+        <img src="img/Takenoko6.png" type="button" class="send" 
+            id="send6" value = "6" onclick="disabled = true;"
+        >
+    </div>
+    <img src="img/out.png" id="out" >
+    <img src="img/nyokki.png" id="nyokki">
+    <div id=output>
+    </div>
+
+
+</div>
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+
+<!--** 以下Firebase **-->
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // 講義内で設定（便利ツール）
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.0/firebase-database.min.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBGFU7rY5JsezK_MNAfBQaM-tP2wS17ajA",
+      authDomain: "gsapp-bafdd.firebaseapp.com",
+      projectId: "gsapp-bafdd",
+      storageBucket: "gsapp-bafdd.appspot.com",
+      messagingSenderId: "155136330679",
+      appId: "1:155136330679:web:189b3c3be7781207e27632"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+
+    // 講義内で設定（便利ツール）
+    //  import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+    //     from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.0/firebase-database.min.js";
+    //       ↑と連携させるらしい
+    const db = getDatabase(app);
+    const dbRef = ref(db, "chat");
+    // ↑なんでこう書くのかは分らず…覚えるものかと。。
+
+  
+
+    // 数字ボタンのクリックイベント
+    $("#send1").on("click", function() {
+        const uname = $("#uname").val();
+        const number = "１にょっき!!";
+        const msg = {
+            uname: uname,
+            text: number
+        };
+        // FirebaseのReal Databaseにデータを飛ばす
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        // FirebaseのRealtime Databaseにデータを飛ばす（２行のみ）
+    });
+
+    $("#send2").on("click", function() {
+        const uname = $("#uname").val();
+        const number = "２にょっき!!";
+        const msg = {
+            uname: uname,
+            text: number
+        }; 
+        // FirebaseのReal Databaseにデータを飛ばす
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        // FirebaseのRealtime Databaseにデータを飛ばす（２行のみ）
+    });
+
+    $("#send3").on("click", function() {
+        const uname = $("#uname").val();
+        const number = "３にょっき!!";
+        const msg = {
+            uname: uname,
+            text: number
+        }; 
+        // FirebaseのReal Databaseにデータを飛ばす
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        // FirebaseのRealtime Databaseにデータを飛ばす（２行のみ）
+    });
+
+    $("#send4").on("click", function() {
+        const uname = $("#uname").val();
+        const number = "４にょっき!!";
+        const msg = {
+            uname: uname,
+            text: number
+        }; 
+        // FirebaseのReal Databaseにデータを飛ばす
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        // FirebaseのRealtime Databaseにデータを飛ばす（２行のみ）
+    });
+
+    $("#send5").on("click", function() {
+        const uname = $("#uname").val();
+        const number = "５にょっき!!";
+        const msg = {
+            uname: uname,
+            text: number
+        }; 
+        // FirebaseのReal Databaseにデータを飛ばす
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        // FirebaseのRealtime Databaseにデータを飛ばす（２行のみ）
+    });
+
+    $("#send6").on("click", function() {
+        const uname = $("#uname").val();
+        const number = "６にょっき!!";
+        const msg = {
+            uname: uname,
+            text: number
+        }; 
+        // FirebaseのReal Databaseにデータを飛ばす
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        // FirebaseのRealtime Databaseにデータを飛ばす（２行のみ）
+    });
+
+
+    let LastMessage = "";
+
+    // Realtime Databaseから情報を取得してページ内に表示させる（＝チャット！）
+    onChildAdded(dbRef, function (data) {
+        const msg = data.val(); //メッセージの内容を取り出す
+        let h = "<div id='message-box'>";
+                h += "<p>";
+                    h += msg.uname;
+                h += "</p>";
+                h += "<P id='message-number'>";
+                    h += msg.text;
+                h += "</p>";
+            h += "</div>";
+        $("#output").append(h);
+        
+        if (LastMessage === msg.text) {
+            $("#out").fadeIn();
+        }
+        // 最新の手がLastMessageになるように毎回更新
+        LastMessage = msg.text
+
+        // 一番下までスクロールする
+        $('#output').animate(cancelAnimationFrame);
+        $('#output').animate({ scrollTop: $('#output')[0].scrollHeight }, 'fast');
+    });
+
+    // AllDeleteを押した時の処理（全てDBを削除し、outputをリセット）
+    $("#AllDelete").on("click", function () {
+        remove(dbRef);
+        $("#output").text("");
+    });
+
+    // NewGame
+    $("#NewGame").on("click", function () {
+        $("#out").fadeOut();
+        $("#nyokki").fadeIn(2000);
+        $("#nyokki").delay(1000).fadeOut(500);
+    });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
